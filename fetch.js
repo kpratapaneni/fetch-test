@@ -35,7 +35,6 @@ app.get('/pyramid', (request, response, next) => {
 });
 
 app.post('/pyramid', (request, response, next) => {
-	console.log("Pyramid is in postssssssś");
 	let str = request.body['pyramid_str'];
 
 	let is_pyr = is_pyramid(str);
@@ -53,7 +52,7 @@ app.use((err, request, response, next) => {
 //Initiating the server and listening to the port.
 app.listen(port, (err) => {
 	if (err) {
-		return console.log('something bad happened', err)
+		return console.log('Error', err)
 	}
 
 	console.log(`server is listening on ${port}`)
