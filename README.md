@@ -9,4 +9,4 @@ Steps to execute the code
 	5) Go the browser and open the app using the local address http://localhost:4000/
 				Note: Make sure that no other local app is running on the port 4000.
 
-Sample screens are provided in the output folder.
+Sample screens are provided in the folder "output" on how to execute the code.
