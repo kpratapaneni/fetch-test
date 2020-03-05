@@ -1,13 +1,7 @@
 const bodyParser = require('body-parser');
 const express = require('express');
-
-
-// const hbs = require('hbs');
-const http = require('http');
-const path = require('path')
 const exphbs = require('express-handlebars')
-
-
+const path = require('path')
 
 const port = 4000;
 
@@ -76,6 +70,7 @@ function is_pyramid(str) {
 
 	let key_obj = {};
 	let str_arr = str.split("");
+	//create a map for each character in the map.
 	for (let i = 0; i < str_arr.length; i++) {
 		if(key_obj[str_arr[i]] !== null && key_obj[str_arr[i]] !== undefined) {
 			key_obj[str_arr[i]]++;
@@ -84,20 +79,18 @@ function is_pyramid(str) {
 		}
 	}
 
-	//if k
+	//keys should be equal to n natural nums
 	if(Object.keys(key_obj).length !== n) {
 		return false;
 	}
 
-	// console.log("Keys ->>>>" , key_obj);
 	let val_obj = Object.keys(key_obj).reduce(function(obj, key) {
 		obj[key_obj[key]] = key;
 		return obj;
 	}, {});
 
-	// console.log("Values ->>>>", val_obj);
-	// console.log(Object.keys(key_obj), Object.keys(key_obj).length);
-	// console.log(Object.keys(val_obj), Object.keys(val_obj).length);
+
+	//keys should be equal to length of unique values of map
 	if(Object.keys(key_obj).length !== Object.keys(val_obj).length) {
 		return false;
 	}
