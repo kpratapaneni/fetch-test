@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>{{title}}</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style type="text/css">
+			.grd {
+				padding: 20px;
+				margin-top: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container bg-light grd">
+			<div class="row">
+				<div class="col-sm bg-light">
+					<h4>Pyramid Example</h4>
+					<form autocomplete="off" onsubmit="validateAndSendReq();return false;">
+						<div class="form-group">
+							<label for="exampleInputText1">Enter String</label>
+							<input type="text" class="form-control" id="exampleInputText1" placeholder="Enter String">
+						</div>
+
+						<!-- <p class=" text-hide" id="error-text"></p> -->
+						<!--  -->
+						<p id="msg-content"></p>
+
+						<button type="button" class="btn btn-primary" onclick="validateAndSendReq()" id="submit-btn">Submit</button>
+					</form>
+
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			function validateAndSendReq() {
+				var str = document.getElementById("exampleInputText1").value;
+				if(str === null || str === "") {
+					document.getElementById("msg-content").className = "text-danger";
+					document.getElementById("msg-content").style.display = "block";
+					document.getElementById("msg-content").textContent = "String should not be empty!";
+					return;
+				}
+
+				document.getElementById("submit-btn").disabled = true;
+				document.getElementById("msg-content").style.display = "none";
+				document.getElementById("msg-content").textContent = "";
+
+
+				var xhttp = new XMLHttpRequest();
+
+				xhttp.onreadystatechange = function() {
+					document.getElementById("msg-content").style.display = "block";
+					document.getElementById("submit-btn").disabled = false;
+					if (this.readyState == 4 && this.status == 200) {
+						var rsp = JSON.parse(this.responseText);
+
+						if(rsp.status === true) {
+							if(rsp.is_pyramid === true) {
+								document.getElementById("msg-content").className = "text-info";
+								document.getElementById("msg-content").textContent = "\"" + str + "\" is a pyramid word!";
+								var itag = document.createElement("i");
+								itag.style.fontSize = "20px";
+								itag.className = "pl-1 fa fa-smile-o";
+								document.getElementById("msg-content").appendChild(itag);
+							} else {
+								document.getElementById("msg-content").className = "text-danger";
+								document.getElementById("msg-content").textContent = "\"" + str + "\" is not a pyramid word!";
+							}
+						} else {
+							document.getElementById("msg-content").className = "text-danger";
+							document.getElementById("msg-content").textContent = "Internal server error!";
+						}
+					} else {
+						document.getElementById("msg-content").className = "text-danger";
+						document.getElementById("msg-content").textContent = "Internal server error!";
+					}
+				};
+
+				xhttp.open("POST", "/pyramid", true);
+				xhttp.setRequestHeader("Content-type", "application/json");
+				xhttp.send(JSON.stringify({"pyramid_str": str}));
+			}
+		</script>
+	</body>
+</html>

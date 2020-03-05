@@ -1,0 +1,24 @@
+{
+  "name": "fetch-test",
+  "version": "1.0.0",
+  "description": "Sample Node JS code to do Fetch assessment. A web service whick checks a string is pyramid or not.",
+  "main": "fetch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kpratapaneni/fetch-test.git"
+  },
+  "author": "Kalpana Pratapaneni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kpratapaneni/fetch-test/issues"
+  },
+  "homepage": "https://github.com/kpratapaneni/fetch-test#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0"
+  }
+}
